@@ -21,14 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/Tablas', [UsoTablas::class, 'index']);
-
-Route::get('/Procedimientos',[UsoProcedimiento::class, 'index']);
-
-Route::get('/Vistas',[UsoVista::class, 'index']);
-
-//Uso de JWT
-
+//----------------------------------------------------------------------
+// iMPLEMENTACIO DE JWT
+//----------------------------------------------------------------------
 Route::group([
     //lo primero no es necesariop
     //'middleware' => 'api',
@@ -43,5 +38,16 @@ Route::group([
     //no es necesario lo siguiente:
     //Route::post('refresh', [AuthController::class, 'refresh']);
     //Route::post('me', [AuthController::class, 'me']);
+
+});
+
+//-----------------------------------------------------------------------
+// ACCESO A BASE DATOS ATRAVES DE TOKENS
+//-----------------------------------------------------------------------
+Route::group(['middleware' => ['jwt']], function() {
+
+    Route::get('Tablas',[UsoTablas::class, 'index']);
+    Route::post('Procedimientos', [UsoProcedimiento::class, 'index']);
+    Route::post('Vistas', [UsoVista::class, 'index']);    
 
 });
