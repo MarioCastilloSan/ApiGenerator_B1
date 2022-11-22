@@ -47,7 +47,7 @@ Route::group([
 Route::group(['middleware' => ['jwt']], function() {
 
     Route::get('Tablas',[UsoTablas::class, 'index']);
-    Route::post('Procedimientos', [UsoProcedimiento::class, 'index']);
-    Route::post('Vistas', [UsoVista::class, 'index']);    
+    Route::get('Procedimientos', [UsoProcedimiento::class, 'index']);
+    Route::get('Vistas', [UsoVista::class, 'index']);    
 
 });
